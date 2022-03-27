@@ -14,10 +14,12 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Modal
+  Modal,
+  SafeAreaView
 } from 'react-native';
 import {styles} from "./styles"
-
+import Input from './components/atoms/Input/index'
+import CustomModal from './components/molecules/CustomModal/index';
 
 const App = () => {
 
@@ -34,6 +36,8 @@ const App = () => {
   } 
 
   const onHandleModal = (id) => {
+    console.warn(id)
+    console.log(id)
     setSelectedItem(textList.find(itemList => itemList.id === id));
     setModalVisible(!modalVisible)
   }
@@ -54,19 +58,18 @@ const App = () => {
 
   return (
     <>
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.containerInput}>
-        <TextInput
+        <Input
           // style={styles.input}
           // onChangeText={onChangeText}
           // value={null}
           placeholder='Type here your name'
           autoCorrect={false}
           autoFocus={false} //levanta el teclado automaticamente
-          style={styles.textInput}
           placeholderTextColor="white"
           value={text}
-          onChangeText={handleOnChangeInput}
+          handleOnChangeText={handleOnChangeInput}
         />
         <Button
           title="Agregar"
@@ -88,32 +91,17 @@ const App = () => {
           keyExtractor={item=> item.id.toString()}
           >
         </FlatList>
-        <View style={styles.modalContainer}>
-          <Modal
-            animationType='slide'
-            transparent={false}
-            visible={modalVisible}
-            onRequestClose={()=>{}} // cuando se intenta cerrar mostrar un mensaje
-          >
-            <View style={styles.modalTitle}>
-              <Text>Descripcion</Text>
-            </View>
-            <View style={styles.modalContent}>
-              <Text> confirmar borrado del item <Text style={styles.modalContentText}>{selectedItem.value}</Text> </Text>
-              
-            </View>
-            <View style={styles.modalButton}>
-              <Button
-                title="Yes"
-                color="purple"
-                onPress={()=>handleDeleteItem(selectedItem.id)}
-              />
-            </View>
-          </Modal>
-        </View>
+        <CustomModal
+          title='Descripcion'
+          description='confirmar borrado del item '
+          selectedItem={selectedItem}
+          buttonText='Yes'
+          onHandleDeleteItem={handleDeleteItem}
+          visible={modalVisible}
+        />  
       </View>
-    </View>
-      <Button
+    </SafeAreaView>
+      <Button 
           title="alert"
           color="purple"
           onPress={()=>alert(textList.value)}
