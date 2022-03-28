@@ -17,6 +17,13 @@ export const styles = StyleSheet.create({
         flexGrow: 0.6,
         marginHorizontal: 20
     },
+    confirmedText:{
+        fontSize: 14,
+        fontWeight: "bold",
+        color: "grey",
+        justifyContent: "center",
+        alignSelf: "center"
+    }
     // label:{
     //     fontSize: 14,
     //     fontWeight: 'bold',

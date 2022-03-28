@@ -10,10 +10,11 @@ export const styles = StyleSheet.create({
         backgroundColor: 'grey'
     },
     title:{
+        fontFamily: "SourceCodePro-SemiBold",
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
         color: "white",
-        fontWeight: 'bold'
+        // fontWeight: 'bold'
     }
 });
