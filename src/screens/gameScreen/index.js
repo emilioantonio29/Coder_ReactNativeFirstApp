@@ -29,7 +29,8 @@ const GameScreen = ({userOptions, onStartGame}) =>{
                 <HeaderComponent title="Adivina el numero"></HeaderComponent>
                 <Text></Text>
                 <Card>
-                    <Text style={{alignSelf:"center"}}>La suposicion del oponente: {userOptions}</Text>
+                    <Text style={{alignSelf:"center"}}>Numero seleccionado por el oponente: <Text style={{fontWeight:"bold"}}>{userOptions}</Text></Text>
+                    <Text style={{alignSelf:"center"}}>¿El numero random es?</Text>
                     <View style={{padding: 10}}>
                         <Button 
                             title='Menor'
