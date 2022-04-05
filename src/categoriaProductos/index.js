@@ -10,6 +10,7 @@ import {
   Button
 } from 'react-native';
 import {styles} from '../../styles'
+import axios from 'react-native-axios';
 
 const Categorias = ({navigation}) => {
 

@@ -10,21 +10,39 @@ import {
   Button
 } from 'react-native';
 import {styles} from '../../styles'
+import axios from 'react-native-axios';
+import ProductDetail from './productList'
 
 const ListadoProductos = ({navigation}) => {
 
+  const [products, setProducts] = React.useState([]);
+  
+  axios.get('https://soy-glucosa-project.herokuapp.com/apiFirebase/productos')
+  .then(function (response) {
+    console.log(response.data);
+    setProducts(response.data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
   return (
     
-    <View style={styles.container}>    
-      <Text style={styles.container}>Product List</Text>
+    <ScrollView style={styles.container}>    
+      <Text style={styles.container}>Product List (estos productos vienen de una API)</Text>
       <View style={styles.NatigationButton}>
       <Button
-          title="Volver al Home"
+          title="Home"
           onPress={()=> {navigation.navigate('Home')}}
           color="black"
       />
       </View>
-    </View>
+      {
+        products.map((product)=>{
+          return <ProductDetail key={product.producto.id} product={product}/>
+        })
+      }
+    </ScrollView>
   );
 };
 

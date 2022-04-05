@@ -8,6 +8,6 @@ export const styles = StyleSheet.create({
     NatigationButton:{
         justifyContent: "center",
         alignSelf: "center",
-        width: "50%",
+        width: "80%",
     }
 });
