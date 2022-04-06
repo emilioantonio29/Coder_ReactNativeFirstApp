@@ -13,6 +13,7 @@ import {styles} from '../../styles'
 
 const Home = ({navigation, route}) => {
 
+  
   return (
     <View style={styles.container}>    
         <Text style={styles.container}>Home</Text>
