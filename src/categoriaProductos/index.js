@@ -12,12 +12,28 @@ import {
 } from 'react-native';
 import {styles} from '../../styles'
 import axios from 'react-native-axios';
-import { PRODUCTS } from '../constants/products';
+// import { PRODUCTS } from '../constants/products'; // Reemplazado por redux
+import { useSelector, connect, useDispatch } from 'react-redux';
 
 const Categorias = ({navigation, route}) => {
+  const dispatch = useDispatch();
+  // const productList = useSelector(state=>state.categories.selectedCategory);
   const {id, title, category} = route.params
-  const selectedCategory = PRODUCTS.filter(product => product.category == route.params.id)
-  console.log("selectedCategory" + selectedCategory)
+  // const selectedCategory = PRODUCTS.filter(product => product.category == route.params.id)
+  // console.log("selectedCategory" + selectedCategory)
+
+  const categoryProduct = useSelector(state=>state.products.filteredProducts);
+
+  const handleTouchable = (product, name) =>{
+    // console.log(product)
+    // console.log(name)
+    //dispatch(filteredProducts({payload: category.id}))
+    navigation.navigate('ListadoProductos', {product, title: name})
+  }
+
+
+
+
   return (
     <View style={styles.container}>    
       {/* <Text style={styles.container}>id: {id}</Text> */}
@@ -27,15 +43,15 @@ const Categorias = ({navigation, route}) => {
             title="Productos"
             onPress={()=> {navigation.navigate('ListadoProductos')}}
         /> */}
-        {selectedCategory.map((product) => {
+        {categoryProduct.map((product) => {
           return (
-          <View style={{flexDirection:"row"}}>
+          <View style={{flexDirection:"row"}} key={product.id}>
             
             <Text>{product.name} | Precio:{product.price} | 
             </Text>        
             <TouchableOpacity
               style={{marginLeft: 3}}
-              onPress={()=>navigation.navigate('ListadoProductos', {product, title: product.name})}
+              onPress={()=>{handleTouchable(product, product.name)}}
             >
               <Text>Comprar</Text>
             </TouchableOpacity>
@@ -43,9 +59,15 @@ const Categorias = ({navigation, route}) => {
           )
         })}
       </View>
+      <View style={{marginTop: 100}}>
+        <Button
+          title="Console Log: Productos filtrados REDUX"
+          onPress={()=>console.log(categoryProduct)}
+        />
+      </View>
     </View>
   );
 };
 
-export default Categorias;
+export default connect()(Categorias);
  
