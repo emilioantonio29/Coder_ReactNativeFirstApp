@@ -16,6 +16,7 @@ import CategoryGrid from '../categoryGrid/index';
 import { useSelector, connect, useDispatch } from 'react-redux';
 import {selectedCategory} from '../store/reducers/category.reducer'
 import {filteredProducts } from '../store/reducers/product.reducer'
+import Cart from '../cart';
 
 
 const Home = ({navigation, route}) => {
@@ -40,7 +41,7 @@ const Home = ({navigation, route}) => {
     //     </View>
     // </View>
     <View>
-
+      
       <FlatList
         data={categoryProduct}
         keyExtractor={item=> item.id}
@@ -48,10 +49,15 @@ const Home = ({navigation, route}) => {
         >
       </FlatList>
       <View style={{marginTop: 100}}>
-        <Button
+        {/* <Button
           title="Console Log: Categorias de REDUX"
           onPress={()=>console.log(categoryProduct)}
-        />
+        /> */}
+        
+        {/* <Button
+          title="Test View"
+          onPress={()=>{navigation.navigate('TestView', {title: "test"})}}
+        /> */}
       </View>
     </View>
   );

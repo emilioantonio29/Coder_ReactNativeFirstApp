@@ -7,15 +7,23 @@ import {
   Text,
   useColorScheme,
   View,
-  Button
+  Button, 
+  Pressable
 } from 'react-native';
 import {styles} from '../../styles'
 import axios from 'react-native-axios';
 import ProductDetail from './productList'
+import { useSelector, connect, useDispatch } from 'react-redux';
+import {CartProducts} from '../store/reducers/cart.reducer'
 
 const ListadoProductos = ({navigation, route}) => {
-
+  const dispatch = useDispatch();
   const [products, setProducts] = React.useState([]);
+
+  const handleSelectCategory = (test) =>{
+    dispatch(CartProducts({payload: test}))
+    alert("producto agregado al carrito")
+  }
   
   // axios.get('https://soy-glucosa-project.herokuapp.com/apiFirebase/productos')
   // .then(function (response) {
@@ -35,14 +43,20 @@ const ListadoProductos = ({navigation, route}) => {
       <Text>Descripcion: {route.params.product.description}</Text>
       <Text>Peso: {route.params.product.weight}</Text>
       <Text>Price: {route.params.product.price}</Text>
-
-      <View style={{height:40, marginTop: 30}}>
+      <View style={{height:80, marginTop: 10, alignItems: "center"}}>
+        <Pressable
+          style={{backgroundColor: "green", borderRadius: 10, padding: 10, elevation: 2}}
+          onPress={() => {handleSelectCategory(route.params.product)}}
+        >
+          <Text style={{color: "white"}}>Agregar al carrito</Text>
+        </Pressable>
+      </View>
+      <View style={{height:80, marginTop: 0}}>
         <Button
             title="Volver al Home"
             onPress={()=> {navigation.navigate('Home')}}
             color="black"
         />
-
       </View>
       {/* <Button
             title="Volver al Home"
@@ -58,4 +72,4 @@ const ListadoProductos = ({navigation, route}) => {
   );
 };
 
-export default ListadoProductos;
+export default connect()(ListadoProductos);

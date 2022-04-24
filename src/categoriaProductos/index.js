@@ -53,7 +53,7 @@ const Categorias = ({navigation, route}) => {
               style={{marginLeft: 3}}
               onPress={()=>{handleTouchable(product, product.name)}}
             >
-              <Text>Comprar</Text>
+              <Text style={{color: "green"}}>Comprar</Text>
             </TouchableOpacity>
           </View>
           )

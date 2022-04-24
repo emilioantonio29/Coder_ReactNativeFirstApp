@@ -29,7 +29,9 @@ const ProductReducer = (state, action) => {
             const selectedCategory = PRODUCTS.filter(product => product.category == action.categoryId.payload)
             //console.log(selectedCategory)
             return {
+
                 ...state, filteredProducts: selectedCategory, selectedItem: null,
+                
             }
         default:
             return state = initialState
