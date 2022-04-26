@@ -10,12 +10,15 @@ import React from 'react';
 import AppNavigation from './src/navigation';
 import { Provider } from 'react-redux';
 import store from './src/store/index'
+import { GlobalProvider } from './src/context';
 
 const App = () => {
 
   return (
     <Provider store={store}>
-      <AppNavigation/>
+      <GlobalProvider>
+        <AppNavigation/>
+      </GlobalProvider>
     </Provider>
   );
 };
