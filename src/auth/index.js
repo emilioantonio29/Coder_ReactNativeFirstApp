@@ -5,6 +5,7 @@ import { styles } from './styles';
 const {width, height} = Dimensions.get('window')
 import { colors } from '../constants/themes';
 
+
 const Auth = ({natigation}) => {
     const [text, onChangeText] = React.useState("");
     const [email, setEmail] = React.useState("")
