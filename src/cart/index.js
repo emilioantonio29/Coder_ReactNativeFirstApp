@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, Button, ScrollView, TouchableOpacity } from "react-native";
 import { useSelector, connect, useDispatch } from 'react-redux';
 import {CartDeleteProduct, CartConfirm} from '../store/reducers/cart.reducer'
+import {ShowLoading} from '../store/reducers/auth.reducer'
+import { colors } from "../constants/themes";
+import { LogOut } from "../store/reducers/auth.reducer";
+
 
 const Cart = ({navigation, route}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const cartProducts = useSelector(state=>state.cart);
+  console.log(cartProducts)
+  useSelector(state=>state.auth).then((data)=>console.log(data))
+  
+  //console.log(show)
+  //console.log(cartProducts)
   const handleDeleteItems = (product) =>{
     dispatch(CartDeleteProduct({payload: product}))
   }
@@ -73,12 +82,20 @@ const Cart = ({navigation, route}) => {
           </View>
         </ScrollView>
       </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>CART</Text>
-      </Pressable>
+      <View style={{flex:1, flexDirection: "row"}}>
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => dispatch(LogOut({payload: null}))}
+        >
+          <Text style={styles.textStyle}>Logout</Text>
+        </Pressable>
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.textStyle}>CART</Text>
+        </Pressable>
+      </View>
 
     </View>
   );

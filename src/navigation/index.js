@@ -5,10 +5,13 @@ import AuthNavigator from './auth';
 import { useSelector } from 'react-redux';
 const AppNavigation = () =>{
     const [user, setUser] = React.useState(null)
-    const isAuth = useSelector(state => state.auth.userId)
+    //useSelector(state=>state.loading).then((data)=>setHandleLoading(data.loading))
+    const [showMain, setShowMain] = React.useState("");
+    const isAuth = useSelector(state => state.auth).then((data)=>setShowMain(data.userId))
+    console.log("auth",isAuth)
     return(
         <NavigationContainer>
-            {isAuth ? <MainNavigator/> : <AuthNavigator /> }
+            {showMain ? <MainNavigator/> : <AuthNavigator /> }
         </NavigationContainer>
     )
 }

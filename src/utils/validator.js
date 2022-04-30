@@ -2,6 +2,7 @@ const formatEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 const minPasswordLenght = 6;
 
 const validator = (type, value) =>{
+    
     switch(type){
         case 'email':
             if(formatEmail.test(value)){
@@ -10,11 +11,11 @@ const validator = (type, value) =>{
                 }
             }
             return{
-                error: 'Formato de email no valido, EJ: user@test.com',
+                error: 'Formato de email incorrecto. Ej: user@test.com',
                 value
             }
         case 'password':
-            if(value.lenght >= minPasswordLenght){
+            if(value.length >= minPasswordLenght){
                 return {
                     error: ''
                 }

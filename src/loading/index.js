@@ -9,8 +9,6 @@ const Loading = () => {
   const {showLoading, setShowLoading} = React.useContext(GlobalContext);
 
 
-  console.log("render1")
-
   return (
     <View style={styles.centeredView}>
         
